@@ -36,3 +36,12 @@ export const getDetailProduct = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getListSale = async (req, res) => {
+  try {
+    const listProduct = await Product.find({ sale: { $gte: 0 } });
+    res.status(200).json(listProduct);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
