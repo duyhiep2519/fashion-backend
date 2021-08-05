@@ -9,6 +9,7 @@ import cors from "cors";
 import productRouter from "./routes/product.js";
 import userRouter from "./routes/user.js";
 import cartRouter from "./routes/cart.js";
+import wishlistRouter from "./routes/wishlist.js";
 const PORT = 5000;
 
 dotenv.config();
@@ -46,5 +47,6 @@ app.use(function (req, res, next) {
 app.use("/product", productRouter);
 app.use("/user", userRouter);
 app.use("/cart", cartRouter);
+app.use("/wishlist", wishlistRouter);
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
