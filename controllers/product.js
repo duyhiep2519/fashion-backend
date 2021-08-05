@@ -45,3 +45,21 @@ export const getListSale = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const filterProduct = async (req, res) => {
+  const type = req.query.type,
+    search_q = req.query.search_q;
+
+  try {
+    const listProduct = await Product.find();
+    const result = listProduct.filter(
+      (item) =>
+        item.category.toLowerCase().split(", ").includes(type) &
+        item.name.toLowerCase().includes(search_q)
+    );
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
