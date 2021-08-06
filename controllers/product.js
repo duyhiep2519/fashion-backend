@@ -63,3 +63,33 @@ export const filterProduct = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getProductByFilter = async (req, res) => {
+  const { type, sort_by } = req.query;
+  let sort_query = {};
+  switch (sort_by) {
+    case "name-ascending":
+      sort_query = { name: 1 };
+      break;
+    case "name-descending":
+      sort_query = { name: -1 };
+      break;
+    case "price-descending":
+      sort_query = { price: -1 };
+      break;
+    case "price-ascending":
+      sort_query = { price: 1 };
+      break;
+    default:
+      break;
+  }
+
+  try {
+    const foundProducts = await Product.find({
+      category: { $regex: type, $options: "i" },
+    }).sort(sort_query);
+    res.status(200).json(foundProducts);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
