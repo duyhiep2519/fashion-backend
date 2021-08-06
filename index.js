@@ -10,7 +10,7 @@ import productRouter from "./routes/product.js";
 import userRouter from "./routes/user.js";
 import cartRouter from "./routes/cart.js";
 import wishlistRouter from "./routes/wishlist.js";
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 dotenv.config();
 const app = express();
@@ -49,8 +49,8 @@ app.use("/user", userRouter);
 app.use("/cart", cartRouter);
 app.use("/wishlist", wishlistRouter);
 
-app.get("/", (req, res) => {
-  res.send("Welcome to my server!!");
+app.listen(PORT, () => {
+  console.log("Server is running on port ", PORT);
 });
 
 // server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
