@@ -49,4 +49,8 @@ app.use("/user", userRouter);
 app.use("/cart", cartRouter);
 app.use("/wishlist", wishlistRouter);
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.get("/", (req, res) => {
+  res.send("Welcome to my server!!");
+});
+
+// server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
